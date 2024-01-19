@@ -1,0 +1,48 @@
+Ubuntu Tasks 
+• Change passwords 
+		○ Find a way to automate changing passwords 
+		○ BASH scripting language 
+• Setting up the firewall 
+		○ Host-based firewall (UFW, IP Tables) 
+• Getting process list 
+		○ Set it to display every running process every 10-15 mins. 
+		○ Compare to find any malicious activity. 
+		○ Kill any malicious activity. 
+  
+Iptables 
+iptables Complete Guide | HackerSploit Linux Security (youtube.com) 
+Iptables Tutorial: Ultimate Guide to Linux Firewall (phoenixnap.com) (Basic Syntax list for iptables) 
+apt purge ufw (check if ufw is running with systemctl, if it is running then purge.) 
+iptables --policy INPUT DROP (locks down all input access to web servers regardless of rules.) 
+Rule commands 
+List rules: iptables –L --line-numbers 
+Delete rule(s): iptables -D INPUT [rule #] 
+Flush all rules: iptables –F 
+Save rules: /sbin/iptables-save (makes iptables non-persistant) 
+How to block IP specific IP addresses 
+iptables –I INPUT –s [IP ADDRESS] -j DROP 
+iptables –I OUTPUT –s [IP ADDRESS] -j DROP 
+ Blocking or allowing ports (ports are either tcp or dpt) 
+iptables –I INPUT –p tcp --dport ssh –j DROP  (drops the ssh web server at default port 22) 
+iptables –I INPUT –p tcp --dport 80 –j ACCEPT (accepts the HTTP 80 web server) 
+Iptables –I INPUT –p tcp --dport 8161 –j ACCEPT (accepts the HTTP 8161 web server) 
+IF YOU WANT TO ALLOW SPECIFIC IPs INTO DROPPED PORTS USE: 
+iptables –I INPUT –p tcp --dport [BLOCKED PORT #] -s [IP ADDRESS] -j ACCEPT 
+ 
+Password Automation 
+!/bin/bash 
+PASSWORD_FILE=”/root/user_passwords.txt” (This is the file to store the new passwords, the name will change.) 
+EXCLUDE_USERS=”root|nobody|systemd-network|syslog|_apt|lxd|messagebus|uuidd” (Users to exclude from the password change.) 
+If [ “$(id –u)” -ne 0 ]; then 
+    echo “This script must be run as root” 
+    exit 1 
+Fi (This ensures the script is run as root.)  
+touch “$PASSWORD_FILE” 
+chmod 600 “$PASSWORD_FILE” (This secures the password file.) 
+USERS=$(getent passwd | awk -F: '$3 >= 1000 && $1 !~ /^(‘”$EXCLUDE_USERS”’)$/{print $1}') (Get all user names excluding system users.) 
+for USER in $USERS; do (Iterate over each user and change password.) 
+NEW_PASSWORD=$(openssl rand –base64 12) (Generate a secure password.) 
+echo “$USER:$NEW_PASSWORD” | chpasswd (Change the user’s password.) 
+echo “$USER: $NEW_PASSWORD” >> “$PASSWORD_FILE” (Save the new passwords to the file.) 
+done  
+Echo “Passwords changed and saved to $PASSWORD_FILE” 
