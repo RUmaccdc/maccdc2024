@@ -1,0 +1,34 @@
+TAKE A SNAPSHOT BEFORE ATTEMPTING THIS.
+
+I would highly recommend installing Neo4j using the repository. Neo4j is a database for bloodhound API. I had a couple of issues installing this. had some issues with multiple versions of Java running. currently, neo4k only runs on Java 8 kali currently comes with 11.x. need to tell java to use the legacy version. Next, need to add the repository to download neo4j.
+
+#####
+  echo "deb http://httpredir.debian.org/debian jessie-backports   main" | sudo tee -a /etc/apt/sources.list.d/jessie-backports.list
+  apt-get update
+#####
+  apt-get -t jessie-backports install ca-certificates-java
+##### take the output and put it after set <java8bane>
+  update-java-alternatives --list
+##### currently 
+  update-java-alternatives --jre --set <java8name>
+##### update repo
+  wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
+echo 'deb https://debian.neo4j.org/repo stable/' | sudo tee -a /etc/apt/sources.list.d/neo4j.list
+  sudo apt-get update
+######
+neo4j start -- background
+neo4j console -- foreground
+BloodHound
+
+go to the desirded location you wish to set this up. For me a have a tool directory.
+##### this is already compiled ready to go
+git clone https://github.com/BloodHoundAD/BloodHound.git
+cd BloodHound
+wget https://github.com/BloodHoundAD/BloodHound/releases/download/2.0.4/BloodHound-linux-x64.zip
+unzip BloodHound-linux-x64.zip
+./Bloodhound
+if you get a white screen hit these keys ( crtl + r )
+####
+For a lager selection of  compiled bloodhound releases.
+ https://github.com/BloodHoundAD/BloodHound/releases
+I changed the password before I got to this part. So I will be using screenshots from ippsecs video. when you first setup bloodhound and enter some creds it'll ask you to go to localhost:7687 to change the password. go to your browser and type it in. the default creds for neo4j are neo4j and it won't let you in until you change the password which is nice a feature.
