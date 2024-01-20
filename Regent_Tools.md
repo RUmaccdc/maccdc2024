@@ -186,3 +186,4 @@ https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_CAN_Ubuntu_18-04_V2R10_S
 https://codeload.github.com/BloodHoundAD/BloodHound/zip/refs/heads/master
 https://github.com/BloodHoundAD/BloodHound/releases/download/v4.3.1/BloodHound-win32-x64.zip
 https://github.com/BloodHoundAD/BloodHound/releases/download/v4.3.1/BloodHound-linux-x64.zip
+https://github.com/dirkjanm/BloodHound.py.git
