@@ -183,3 +183,6 @@ Ubuntu 18
 https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/scc-5.8_ubuntu18_ubuntu20_amd64_bundle.zip
 https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_CAN_Ubuntu_18-04_V2R10_STIG_SCAP_1-2_Benchmark.zip
 
+https://codeload.github.com/BloodHoundAD/BloodHound/zip/refs/heads/master
+https://github.com/BloodHoundAD/BloodHound/releases/download/v4.3.1/BloodHound-win32-x64.zip
+https://github.com/BloodHoundAD/BloodHound/releases/download/v4.3.1/BloodHound-linux-x64.zip
